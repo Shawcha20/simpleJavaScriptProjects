@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #000, #01356d, #019f55);
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            padding: 20px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h1 {
+            margin: 0;
+            color: white;
+        }
+
+        h1 u {
+            color: #00bfff;
+        }
+
+        .inputText {
+            position: relative;
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .inputText input {
+            height: 50px;
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 10px 40px 10px 10px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .inputText i {
+            position: absolute;
+            right: 3%;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #555;
+            cursor: pointer;
+        }
+
+        button {
+            border: none;
+            padding: 10px;
+            border-radius: .4rem;
+            width: 100%;
+            max-width: 200px;
+            background-color: pink;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .inputText input {
+                font-size: 1rem;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate A</h1>
+        <h1><u>Random Password</u></h1>
+        <div class="inputText">
+            <input type="text" class="textBox" placeholder="Your password will appear here">
+            <i class="fas fa-clipboard"></i>
+        </div>
+        <button>Generate Password</button>
+    </div>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     <script>
+        let passwordPattern = "";
+        let allChar = [];
+
+        for (let i = 97; i <= 122; i++) allChar.push(String.fromCharCode(i)); // a-z
+        for (let i = 65; i <= 90; i++) allChar.push(String.fromCharCode(i));  // A-Z
+        for (let i = 48; i <= 57; i++) allChar.push(String.fromCharCode(i));  // 0-9
+
+        let specialRanges = [
+            [33, 47], [58, 64], [91, 96], [123, 126]
+        ];
+        specialRanges.forEach(([start, end]) => {
+            for (let i = start; i <= end; i++) {
+                allChar.push(String.fromCharCode(i));
+            }
+        });
+
+        $("button").on("click", function () {
+            passwordPattern = "";
+            let randomSize = Math.floor(Math.random() * 50) + 7;
+            for (let i = 0; i < randomSize; i++) {
+                let random = Math.floor(Math.random() * allChar.length);
+                passwordPattern += allChar[random];
+            }
+            $(".textBox").val(passwordPattern);
+        });
+
+        $("i").on("click", function () {
+            navigator.clipboard.writeText(passwordPattern)
+                .then(() => {
+                    alert("Password copied to clipboard!");
+                    $(".textBox").val("");
+                })
+                .catch(err => {
+                    console.error("Failed to copy: ", err);
+                });
+        });
+    </script>
+</body>
+</html>

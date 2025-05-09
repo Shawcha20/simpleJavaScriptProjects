@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <style>
+    body{
+        background-color: #222f;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
+    }
+    .wire{
+        position: absolute;
+        height: 60vh;
+        width: 4px;
+        background-color: #000;
+        left:calc(50%);
+        bottom:50%;
+        z-index:0;
+    }
+    .container{
+        display: block;
+    }
+    .lightOn{
+        background:radial-gradient(#555,#111);
+        height: 100vh;
+        width: 100%;
+    }
+    .bulb{
+        position: relative;
+        width: 80px;
+        height: 80px;
+        background: transparent;
+        z-index: 2;
+     
+    }
+    .bulb i{
+        font-size: 4rem;
+        color:#444;
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%) rotate(180deg);
+    }
+    .powerOff{
+        position: absolute;
+        top:60px;
+        right:100px;
+        width: 40px;
+        height:40px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: gray 0px 10px 15px -15px;
+        cursor:pointer;
+    }
+    .powerOff i{
+        font-size: 1.5rem;
+        color:#444;
+    }
+    .powerOff .lightOn{
+        background: green;
+    }
+    .lightOn .bulb i{
+        color:#ffd700;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="container ">
+        <div class="wire"></div>
+        <div class="bulb">  <i class="fas fa-lightbulb"></i></div>
+    </div>
+
+    <div class="powerOff">  <i class="fas fa-power-off"></i></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <script>
+    $(".fa-power-off").on("click",function(){
+        $("body").toggleClass("lightOn");
+        $(".powerOff").css("background","green");
+    });
+  </script>
+</body>
+</html>

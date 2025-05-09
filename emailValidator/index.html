@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #00b4db, #0083b0);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            padding: 2rem;
+            margin: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 10px 10px 30px 1px rgb(144, 144, 135);
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .content input {
+            width: 100%;
+            height: 30px;
+            border: 1px solid red;
+            border-radius: 5px;
+        }
+
+        .content i {
+            position: absolute;
+            right: 3%;
+            top: 20%;
+            color: rgb(26, 209, 26);
+        }
+    #error{
+        visibility: hidden;
+        position:absolute;
+            bottom: -80%;
+            font-size: .8rem;
+            color:red;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <label for="email">Email</label>
+        <div class="content">
+            <input type="text" name="" id="inputText">
+           <div><i class="fas fa-circle-check" style="visibility: hidden;"></i></div> 
+            <p id="error"> Please Enter a valid Email</p>
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+   $(document).ready(function () {
+    $("#inputText").on("keyup", function () {
+        var input = $(this).val();
+        if (
+            input.includes("@gmail.com") ||
+            input.includes("@icloud.com") ||
+            input.includes("@yahoo.com")
+        ) {
+            $(".content div").html("<i class='fas fa-circle-check' style='color: green; visibility:visible'></i>");
+            $("#error").css("visibility", "hidden");
+        } else {
+            $(".content div").html("<i class='fas fa-circle-exclamation' style='color: red;'></i>");
+            $("#error").css("visibility", "visible");
+        }
+    });
+});
+
+    </script>
+</body>
+
+</html>

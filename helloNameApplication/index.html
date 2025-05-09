@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #b5c7d8;
+           
+            text-align: center;
+        }
+        .container{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+            flex-direction: column;
+        }
+        button{
+            border:3px solid white;
+            border-radius: .4rem;
+            padding:.4rem;
+            cursor: pointer;
+            background-color: #ff51bc;
+            transition: font-size,.4s;
+        }
+        button:hover{
+            background-color:  #b16092;
+            font-size: 1rem;
+        }
+        span{
+            color:red;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello <span>World!</span></h1>
+        <button>Click On Me!!</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+      document.querySelector("button").addEventListener("click",function(){
+            var name=prompt("Enter Your name here");
+            $("span").text(name);
+        })
+    </script>
+</body>
+</html>
