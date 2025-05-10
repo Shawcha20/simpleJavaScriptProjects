@@ -33,6 +33,7 @@
                 background-color: rgb(112, 112, 247);
                 border-radius: 1rem;
                 animation: comeIn 1s ease-in-out;
+                box-shadow: 10px 10px 10px 1px rgb(159, 158, 158);
             }
             @keyframes comeIn {
                 from{
@@ -71,6 +72,7 @@
             }
             .result{
                 visibility: hidden;
+                margin:1rem;
             }
         </style>
 </head>
@@ -89,7 +91,7 @@
         $("button").on("click",function(){
             var text= $("input").val();
             var res= $(".result");
-            // console.log(res.text());
+            console.log(res.text());
             var len= (text.length);
             var right=text.length-1;
             var left= 0;
@@ -97,14 +99,14 @@
                 if(text[left]!=text[right])
             {
                 res.css("visibility", "visible");
-                res.text("not a pallindrome");
+                res.text(`${text} is not a pallindrome`);
                 return;
             }
             left++;
             right--;
             }
             res.css("visibility", "visible");
-            res.text("a pallindrome");
+            res.text(`${text} is a pallindrome`);
             return;
         })
     </script>

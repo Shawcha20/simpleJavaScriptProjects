@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: whitesmoke;
+            height: 100vh;
+        }
+        .card{
+            background-color: pink;
+            border:none;
+            border-radius: 1rem;
+            display: flex;
+            max-width: 300px;
+            width: 100%;
+            text-align: center;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, button, p{
+            margin:1rem;
+        }
+        .input_text{
+            height: 30px;
+            width: 80%;
+            background-color: white;
+            text-align: left;
+            margin:1rem;
+            border-radius: 10px;
+        }
+        input{
+            border:none;
+            line-height: 30px;
+            width: 100%;
+            padding:.3rem;
+        border-radius: 10px;
+            outline: none;
+        }
+        button{
+            padding:.6rem;
+            border:none;
+            border-radius: .6rem;
+            background-color: rgb(59, 206, 59);
+            color:white;
+        }
+        .res{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Unicode Charecter Converter</h1>
+        <div class="input_text">
+        <input type="text" placeholder="input here"></div>
+        <button>Convert</button>
+        <p class="res">nothing</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $("button").on("click",function(){
+            var inp =$("input").val();
+                var con=inp.charCodeAt(0);
+                console.log(con);
+                $(".res").text(`${con} is the value of ${inp}`).css("visibility","visible");
+                
+        });
+    </script>
+</body>
+</html>
