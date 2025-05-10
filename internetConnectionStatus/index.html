@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: whitesmoke;
+            height: 100vh;
+        }
+
+        .card {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 300px;
+            background-color: white;
+            box-shadow: 0px 0px 10px 1px rgb(98, 92, 92);
+            border-radius: 10px;
+        }
+
+        h1,
+        p {
+            margin: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Internet Connection Status Detector</h1>
+        <p>connection Staus: <span class="conSt"></span></p>
+        <p>IP address: <span class="ipAd"></span></p>
+        <p>Netwrok Strength: <span class="netSt"></span></p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var conSt = $(".conSt");
+        var ipAd = $(".ipAd");
+        var netSt = $(".netSt");
+        $(document).ready(function () {
+            if (navigator.onLine) {
+                fetch('https://api.ipify.org?format=json')
+                    .then((response) => response.json())
+                    .then((data) => {
+                        conSt.text("Connected");
+                        ipAd.text(data.ip);
+                        var connection = navigator.connection;
+                        var networkSt=connection?connection.downlink+'Mbps':'unknown';
+                        netSt.text(networkSt);
+                    })
+                    .catch(() => {
+                        conSt.text("Connected (No IP)");
+                        ipAd.text("Unavailable");
+                        netSt.text("-")
+                    });
+            } else {
+                conSt.text("Disconnected");
+                ipAd.text("-");
+                  netSt.text("-")
+            }
+        });
+
+    </script>
+</body>
+
+</html>
