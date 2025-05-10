@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: whitesmoke;
+        }
+
+        .card {
+            display: flex;
+            width: 100%;
+            max-width: 400px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            box-shadow: 0 0 10px 1px rgb(114, 110, 110);
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1,
+        .box,
+        .slider,
+        .result {
+            margin: .7rem;
+        }
+
+        .box {
+            height: 200px;
+            width: 250px;
+            background-color: rgb(0, 0, 0);
+            border-radius: 1rem;
+        }
+
+        .slider_group {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0.7rem 0;
+            width: 100%;
+            align-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .result {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .sliders {
+            max-width: 360px;
+            width: 100%;
+        }
+
+        .result p {
+            border: none;
+            background-color: rgb(87, 79, 79);
+            padding: .5rem;
+            font-size: 1rem;
+            color: white;
+        }
+
+        input {
+            width: 80%;
+        }
+
+        .showRed,
+        .showGreen,
+        .showBlue {
+            /* position:absolute;
+            right:-8%; */
+        }
+
+        button {
+            border: none;
+            background-color: rgb(133, 236, 104);
+            padding: .5rem;
+            font-weight: bold;
+            line-height: 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+        }
+
+        .button_press {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>RGB Color Generator</h1>
+        <div class="box">
+        </div>
+        <div class="sliders">
+            <div class="slider_group">
+                <label for="red">R</label>
+                <input type="range" min="0" max="255" value="0" id="redRange">
+                <p class="showRed">0</p>
+            </div>
+            <div class="slider_group">
+                <label for="green">G</label>
+                <input type="range" min="0" max="255" value="0" id="greenRange">
+                <p class="showGreen">0</p>
+            </div>
+            <div class="slider_group">
+                <label for="blue">B</label>
+                <input type="range" min="0" max="255" value="0" id="blueRange">
+                <p class="showBlue">0</p>
+            </div>
+        </div>
+        <div class="result">
+            <button>Copy RGB</button>
+            <p>RGB(<span>0</span>,<span>0</span>,<span>0</span>)</p>
+        </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var gSlider, rSlider, bSlider, gShow, bShow, rShow, result;
+        $(document).ready(function () {
+            gSlider = $("#greenRange");
+            gShow = $(".showGreen");
+            bSlider = $("#blueRange");
+            bShow = $(".showBlue");
+            rSlider = $("#redRange");
+            rShow = $(".showRed");
+            result = $(".result p");
+            gSlider.on("input", doAction);
+            bSlider.on("input", doAction);
+            rSlider.on("input", doAction);
+
+        });
+
+        var copy = $("button");
+        copy.on("click", function () {
+            var rgb = `rgb(${rSlider.val()},${gSlider.val()},${bSlider.val()})`
+            navigator.clipboard.writeText(rgb);
+            copy.css("background-color", rgb);
+
+            setTimeout(() => {
+                copy.css("background-color", "rgb(133, 236, 104)");
+            }, 500);
+            alert("text copied");
+        });
+      
+        function doAction() {
+            gShow.text(gSlider.val());
+            bShow.text(bSlider.val());
+            rShow.text(rSlider.val());
+            result.text(`RGB(${rSlider.val()},${gSlider.val()},${bSlider.val()})`);
+            var boxColor = $(".box");
+            boxColor.css("background-color", `rgb(${rSlider.val()},${gSlider.val()},${bSlider.val()})`);
+        }
+
+    </script>
+</body>
+
+</html>
