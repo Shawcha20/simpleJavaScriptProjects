@@ -24,7 +24,7 @@
         .card {
             display: flex;
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -56,8 +56,8 @@
             width: 100%;
             align-content: center;
             flex-wrap: wrap;
-            gap: 1rem;
             position: relative;
+            gap: 1rem;
         }
 
         .result {
@@ -68,7 +68,7 @@
         }
 
         .sliders {
-            max-width: 360px;
+
             width: 100%;
         }
 
@@ -87,8 +87,16 @@
         .showRed,
         .showGreen,
         .showBlue {
-            /* position:absolute;
-            right:-8%; */
+            width: 11%;
+            padding: .1rem;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        label {
+            width: .5%;
         }
 
         button {
@@ -120,17 +128,17 @@
             <div class="slider_group">
                 <label for="red">R</label>
                 <input type="range" min="0" max="255" value="0" id="redRange">
-                <p class="showRed">0</p>
+                <input type="number" class="showRed" placeholder="0"></input>
             </div>
             <div class="slider_group">
                 <label for="green">G</label>
                 <input type="range" min="0" max="255" value="0" id="greenRange">
-                <p class="showGreen">0</p>
+                <input type="number" class="showGreen" placeholder="0"></input>
             </div>
             <div class="slider_group">
                 <label for="blue">B</label>
                 <input type="range" min="0" max="255" value="0" id="blueRange">
-                <p class="showBlue">0</p>
+                <input type="number" class="showBlue" placeholder="0"></input>
             </div>
         </div>
         <div class="result">
@@ -153,7 +161,9 @@
             gSlider.on("input", doAction);
             bSlider.on("input", doAction);
             rSlider.on("input", doAction);
-
+            gShow.on("keydown", handleInput);
+            rShow.on("keydown", handleInput);
+            bShow.on("keydown", handleInput);
         });
 
         var copy = $("button");
@@ -167,16 +177,45 @@
             }, 500);
             alert("text copied");
         });
-      
+
         function doAction() {
-            gShow.text(gSlider.val());
-            bShow.text(bSlider.val());
-            rShow.text(rSlider.val());
+            gShow.val(gSlider.val());
+            bShow.val(bSlider.val());
+            rShow.val(rSlider.val());
             result.text(`RGB(${rSlider.val()},${gSlider.val()},${bSlider.val()})`);
             var boxColor = $(".box");
             boxColor.css("background-color", `rgb(${rSlider.val()},${gSlider.val()},${bSlider.val()})`);
         }
+        function handleInput(event) {
+            if (event.key == "Enter") {
+                gShow.val(Math.min(255, Math.max(0, gShow.val())));
+                rShow.val(Math.min(255, Math.max(0, rShow.val())));
+                bShow.val(Math.min(255, Math.max(0, bShow.val())));
+                inputAction();
+            }
+        }
+        function inputAction() {
+            const r = parseInt(rShow.val());
+            const g = parseInt(gShow.val());
+            const b = parseInt(bShow.val());
 
+            // Clamp values between 0 and 255
+            const clamp = val => Math.max(0, Math.min(255, val));
+
+            rSlider.val(clamp(r));
+            gSlider.val(clamp(g));
+            bSlider.val(clamp(b));
+
+            rShow.val(clamp(r));
+            gShow.val(clamp(g));
+            bShow.val(clamp(b));
+
+            const rgbShow = `RGB(${clamp(r)},${clamp(g)},${clamp(b)})`;
+            result.text(rgbShow);
+            $(".box").css("background-color", rgbShow);
+        }
+
+      
     </script>
 </body>
 
