@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+            body{
+                text-align: center;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: whitesmoke;
+            }
+            .card{
+                width: 100%;
+                max-width: 300px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: rgb(112, 112, 247);
+                border-radius: 1rem;
+                animation: comeIn 1s ease-in-out;
+            }
+            @keyframes comeIn {
+                from{
+                    opacity: 0;
+                    transform: translateY(-20%);
+                }
+                to{
+                   opacity: 1;
+                    transform: translateY(0px); 
+                }
+            }
+            h1{
+                margin:1rem;
+            }
+            .container{
+                height: 2rem;
+                margin:1rem;
+                width: 80%;
+            }
+            input{
+                border:none;
+                line-height: 1rem;
+                font-size: .8rem;
+                padding: 1rem;
+                 width: 100%;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+            button{
+                border-radius: 5px;
+                margin:1rem;
+                border:none;
+                color:white;
+                padding:.4rem;
+                background-color: rgb(32, 219, 32);
+            }
+            .result{
+                visibility: hidden;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Pallindrome Checker</h1>
+        <div class="container">
+            <input type="text" placeholder="Enter here">
+        </div>
+        <button>Check</button>
+        <p class="result">input</p>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $("button").on("click",function(){
+            var text= $("input").val();
+            var res= $(".result");
+            // console.log(res.text());
+            var len= (text.length);
+            var right=text.length-1;
+            var left= 0;
+            while(left<right){
+                if(text[left]!=text[right])
+            {
+                res.css("visibility", "visible");
+                res.text("not a pallindrome");
+                return;
+            }
+            left++;
+            right--;
+            }
+            res.css("visibility", "visible");
+            res.text("a pallindrome");
+            return;
+        })
+    </script>
+</body>
+
+</html>
