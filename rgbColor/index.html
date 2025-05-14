@@ -116,6 +116,12 @@
         .button_press {
             background-color: red;
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -195,27 +201,28 @@
             }
         }
         function inputAction() {
-            const r = parseInt(rShow.val());
-            const g = parseInt(gShow.val());
-            const b = parseInt(bShow.val());
+            const r =Math.max(0, Math.min(255,parseInt(rShow.val())));
+            const g = Math.max(Math.min(255,(gShow.val())));
+            const b = Math.max(Math.min(parseInt(bShow.val()),255));
+
 
             // Clamp values between 0 and 255
-            const clamp = val => Math.max(0, Math.min(255, val));
+           // const clamp = val => Math.max(0, Math.min(255, val));
 
-            rSlider.val(clamp(r));
-            gSlider.val(clamp(g));
-            bSlider.val(clamp(b));
+            rSlider.val(r);
+            gSlider.val(g);
+            bSlider.val(b);
 
-            rShow.val(clamp(r));
-            gShow.val(clamp(g));
-            bShow.val(clamp(b));
+            // rShow.val(clamp(r));
+            // gShow.val(clamp(g));
+            // bShow.val(clamp(b));
 
-            const rgbShow = `RGB(${clamp(r)},${clamp(g)},${clamp(b)})`;
+            const rgbShow = `RGB(${r},${g},${b})`;
             result.text(rgbShow);
             $(".box").css("background-color", rgbShow);
         }
 
-      
+
     </script>
 </body>
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 10px;
+            text-align: center;
+        }
+
+        /*display grid diye kora
+        /* .boxes{
+            display: grid;
+            grid-template-columns: repeat(8,1fr);
+            height: 100vh;
+            grid-template-rows: repeat(5 ,1fr);
+            gap:1rem;
+        } */
+
+        .boxes {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .box_size {
+            background-color: red;
+            border-radius: .5rem;
+            height: 200px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            border-radius: .5rem;
+            color: white;
+            padding: 5%;
+            background-color: rgb(137, 119, 238);
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1><u>Random Color Generator</u></h1>
+    <div class="boxes">
+        <div class="row1"><button>copy</button></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        var randomRed, randomBlue, randomGreen;
+        var box=$(".boxes");
+        var color="";
+        $(document).ready(function(){
+        for( var i=0; i<40; i++)
+    {
+        randomRed=Math.floor(Math.random()*255)+1;
+        randomBlue=Math.floor(Math.random()*255)+1;
+        randomGreen=Math.floor(Math.random()*255)+1;
+        color+=`<div class="box_size" style="background-color: rgb(${randomRed},${randomGreen},${randomBlue})"><button id="${i}" data-color="rgb(${randomRed},${randomGreen},${randomBlue})">copy</button></div>`;
+
+    }
+        box.html(color);
+});
+ 
+ $(document).on("click","button",function(){
+    var getColor= $(this).attr("data-color");
+    console.log(getColor);
+    navigator.clipboard.writeText(getColor);
+    alert(getColor)
+ })
+    </script> -->
+    <h1>Random Color Generator</h1>
+    <div class="container">
+        <div class="color-container">
+            <span></span>
+            <button></button>
+        </div>
+    </div>
+    <script>
+        const contianerE1=document.querySelector(".container");
+        for (let index = 0; index < 50; index++) {
+            const container = document.createElement("div");
+            container.classList.add("color-container");
+            const colorCode= document.createElement("span");
+            colorCode.classList.add("color-code");
+            container.appendChild(colorCode);
+            const copyButton= document.createElement("button");
+            copyButton.innerText="copy";
+            container.appendChild(copyButton);
+            containerE1.appendChild(container);
+        }
+    </script>
+</body>
+
+</html>

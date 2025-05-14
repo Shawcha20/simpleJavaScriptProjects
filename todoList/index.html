@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Todo list</h1>
+    <div class="elements">
+        <input type="text" placeholder="Enter text here">
+        <button>Add</button>
+    </div>
+    <ul class="listContainer" style="list-style:none">
+      
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        const listContainer=$(".listContainer")
+        const elements=$(".elements");
+        var inputField;
+        var button=$("button");
+        button.on("click",function(){
+            var input=$("input");
+            inputField=input.val();
+            console.log(inputField);
+            if(inputField===''){
+                alert("enter some text into the field");
+            }
+            else{
+                var li=$("<li>").text(inputField);
+                    listContainer.append(li);
+                    localStorage.setItem("data",listContainer.html());
+            }
+            input.val('')
+        });
+        $(document).ready(function()
+    {
+        listContainer.html(localStorage.getItem("data"));
+    })
+    </script>
+</body>
+
+</html>

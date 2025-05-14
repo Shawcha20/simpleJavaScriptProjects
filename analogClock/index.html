@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background:radial-gradient(circle, rgb(169, 130, 130), green, blue);
+        }
+        .container{
+            position:relative;
+        }
+        .clock{
+            width: 300px;
+            height:300px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,.1);
+            border: 4px solid rgba(121,112, 112,.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          
+        }
+        .clock span{
+            position: absolute;
+            transform: rotate(calc(30deg * var(--i)));
+            inset:12px;
+            text-align:center;
+        }
+        .clock span b{
+           
+            transform: rotate(calc(-30deg * var(--i)));
+             display: inline-block;
+
+        }
+        .clock::before{
+            content:'';
+            position: absolute;
+            width:8px;
+            height:8px;
+            border-radius: 50%;
+            background-color: #fff;
+            z-index: 2;
+
+        }
+        .hand{
+            position:absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hand i{
+            position:absolute;
+            background-color: var(--clr);
+            width:4px;
+            height: var(--h);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clock">
+            <div class="hand" style="--clr: red; --h: 74px" id="hour">
+                <i></i>
+            </div>
+            <div class="hand" style="--clr: blue; --h: 84px" id="min">
+                <i></i>
+            </div>
+            <div class="hand" style="--clr: green; --h: 94px" id="sec">
+                <i></i>
+            </div>
+            <span style="--i:1;"> <b>1</b></span>
+            <span style="--i:2;"> <b>2</b></span>
+            <span style="--i:3;"> <b>3</b></span>
+            <span style="--i:4;"> <b>4</b></span>
+            <span style="--i:5;"> <b>5</b></span>
+            <span style="--i:6;"> <b>6</b></span>
+            <span style="--i:7;"> <b>7</b></span>
+            <span style="--i:8;"> <b>8</b></span>
+            <span style="--i:9;"> <b>9</b></span>
+            <span style="--i:10;"> <b>10</b></span>
+            <span style="--i:11;"> <b>11</b></span>
+            <span style="--i:12;"> <b>12</b></span>
+        </div>
+    </div> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        let hour=$("#hour");
+        let min= $("#min");
+        let sec=$("#sec");
+        function displayTime(){
+            let date= new Date();
+            console.log(date);
+            let hh=date.getHours();
+            let mm= date.getMinutes();
+            let ss= date.getSeconds();
+            console.log(hh,mm,ss);
+            let hRotation= 30*hh+mm/2;
+            let mRotation= 6*mm;
+            let sRotation=6 *ss;
+            hour.css("transform",`rotate(${hRotation}deg)`);
+            min.css("transform",`rotate(${mRotation}deg)`);
+            sec.css("transform",`rotate(${sRotation}deg)`);
+        }
+       setInterval(displayTime,1000);
+    </script>
+</body>
+</html>
